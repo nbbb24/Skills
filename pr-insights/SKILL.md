@@ -1,16 +1,20 @@
 ---
 name: pr-insights
-description: Analyze pull requests for any repository over a configurable time window. Use when asked for PR insights, a categorized account of each PR's work, or a summary of delivered and in-progress capabilities. Do not use for creating, reviewing, or modifying individual PRs.
+description: 汇总仓库近期 PR/MR 情况、过去几天或几周的改动、已合并与进行中的能力。Use for repository-wide pull/merge request activity reports, including a repository URL plus “看一下过去三周的 PR 情况”. Do not use for creating, reviewing, or modifying an individual PR.
 ---
 
 # PR Insights
 
 Produce a complete, traceable account of repository PR activity and the capabilities it represents. Keep the skill independent of any particular repository, hosting provider, language, or module layout.
 
+## When to activate
+
+Use this workflow for repository-wide PR/MR summaries, including informal Chinese or English requests to “look at recent PRs”. A repository URL plus a time window is sufficient; the user does not need to name this skill, ask for a report file, or use the word “analysis”. Announce that you are using `pr-insights`, then follow the collection and output contract below.
+
 ## Inputs and defaults
 
 - Repository: use the repository the user names; otherwise infer it from the current checkout's remote and record the resolved URL. Ask only when multiple plausible repositories remain.
-- Window: use the requested positive integer `N`; otherwise use 30 rolling days. Compute `[start, end)` at run time in the user's timezone and write both timestamps with offsets in the report.
+- Window: use the requested date range or duration, preserving its unit (for example, “过去三周” means 21 rolling days); otherwise use 30 rolling days. Compute `[start, end)` at run time in the user's timezone and write both timestamps with offsets in the report.
 - Scope: include every PR whose `created_at`, `updated_at`, `closed_at`, or `merged_at` falls in the window, across all target branches and statuses. Deduplicate by repository and PR number. An update caused only by discussion still qualifies as activity; do not describe the whole PR as work completed during this window.
 - Output: write `report.md` and `prs.json` in a user-specified directory, or in `pr-insights/<owner>-<repo>/<end-date>/` under the current working directory. If that path already exists, use a timestamped subdirectory rather than overwriting it. Do not commit the report to the analyzed repository unless asked.
 

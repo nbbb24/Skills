@@ -1,6 +1,6 @@
 ---
 name: readme-sync-from-prs
-description: Update an existing repository README from evidence-backed PR insights. Use when asked to reflect recent merged PR capabilities, usage changes, or compatibility changes in README files. Do not use for release notes, changelogs, or creating a README from scratch.
+description: 根据近期已合并 PR 更新现有仓库 README，补齐能力、用法与兼容性说明。Use when asked to sync an existing README with verified PR outcomes. Do not use for release notes, changelogs, creating a README from scratch, or PR summaries without a README edit request.
 ---
 
 # README Sync from PR Insights
